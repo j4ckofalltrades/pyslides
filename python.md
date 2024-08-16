@@ -106,7 +106,7 @@ False  # => False
 ```
 
 ---
-### None
+### The `None` type
 
 ```python
 # None is an object
@@ -146,7 +146,7 @@ print(fave_music_genre) # prints out user provided input
 
 ---
 
-### Error Handling
+## Error Handling
 
 ```python
 # Handle exceptions with a try/except block
@@ -159,7 +159,7 @@ except ValueError:
 ```
 
 ---
-### Getting type information
+## Getting type information
 
 ```python
 print(type(1)) # => <class 'int'>
@@ -169,7 +169,6 @@ print(isinstance(1, int)) # True
 ```
 
 ---
-
 ## Functions
 
 In programming, a **function** is a self-contained block of code that encapsulates a specific task or related group of tasks.
@@ -229,7 +228,6 @@ def set_x(num):
 ```
 
 ---
-
 ## Conditionals
 
 ---
@@ -248,14 +246,34 @@ not False  # => True
 
 ---
 
-### Truth Table
+### `and` Truth Table
 
-| X     | Y     | X and Y | X or Y | not(X) | not(Y) |
-| ----- | ----- | ------- | ------ | ------ | ------ |
-| True  | True  | True    | True   | False  | False  |
-| True  | False | False   | True   | False  | True   |
-| False | True  | False   | True   | True   | False  |
-| False | False | False   | False  | True   | True   |
+| X     | Y     | X and Y |
+| ----- | ----- | ------- |
+| True  | True  | True    |
+| True  | False | False   |
+| False | True  | False   |
+| False | False | False   |
+
+---
+
+### `or` Truth Table
+
+| X     | Y     | X or Y |
+| ----- | ----- | ------ |
+| True  | True  | True   |
+| True  | False | True   |
+| False | True  | True   |
+| False | False | False  |
+
+---
+
+### `not` Truth Table
+
+| X     | not(X) |
+| ----- | ------ |
+| True  | False  |
+| False | False  |
 
 ---
 
@@ -365,8 +383,8 @@ print(a[6])  # Raises an IndexError
 
 ```python
 li = [
-    1,
-    [1, 2, 3],
+	1,
+    [1, 2, 3]
     5,
 ]
 
@@ -427,7 +445,7 @@ li.pop(1)       # => 2 and li is now [1, 3]
 
 ---
 
-### List Operations (cont.)
+### List Operations (cont. 1)
 
 ```python
 a = ['foo', 'bar', 'baz', 'qux', 'quux', 'corge']
@@ -441,7 +459,6 @@ print(len(a)) # 6
 ```
 
 ---
-
 ## Loops
 
 ---
@@ -481,7 +498,7 @@ for animal in ["dog", "cat", "mouse"]:
 
 ---
 
-### `for` loop (cont.)
+### `for` loop (cont. 1)
 
 ```python
 # updating a list "in-line"
@@ -489,13 +506,13 @@ nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 for index in range(len(nums)):
     nums[index] = nums[index] ** 2
-print(nums)
+print(squares)
 # [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
 ```
 
 ---
 
-### `for` loop (cont.)
+### `for` loop (cont. 2)
 
 ```python
 # creating a new list
@@ -527,7 +544,7 @@ for i in range(4):
 
 ---
 
-### `range` (cont.)
+### `range` (cont. 1)
 
 ```python
 """
@@ -545,7 +562,7 @@ for i in range(4, 8):
 
 ---
 
-### `range` (cont.)
+### `range` (cont. 2)
 
 ```python
 """
@@ -583,7 +600,7 @@ nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 for index, value in enumerate(nums):
     nums[index] = value ** 2
-print(nums)
+print(squares)
 # [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
 ```
 
@@ -637,10 +654,165 @@ print(squares) # [1, 4, 9, 16]
 
 ---
 
-## File I/O
+### Dictionaries
+
+```python
+# Dictionaries store mappings from keys to values
+empty = {}
+# Here is a prefilled dictionary
+filled = {"one": 1, "two": 2, "three": 3}
+```
 
 ---
 
-## OOP
+### Dictionary Keys and Values
+
+```python
+# Note keys for dictionaries have to be immutable types.
+# Immutable types include ints, floats, strings, tuples.
+invalid = {[1,2,3]: "123"}  # => Yield a TypeError
+valid = {"123": [1,2,3]}   # Values can be of any type
+```
+
+---
+
+### Looking up values
+
+```python
+filled = {"one": 1, "two": 2, "three": 3}
+
+# Look up values with []
+print(filled["one"])  # => 1
+
+# Check for existence of keys in a dictionary with "in"
+print("one" in filled)  # => True
+print(1 in filled)      # => False
+
+# Looking up a non-existing key is a KeyError
+try:
+	filled["four"]  # KeyError
+except KeyError:
+	print("Key does not exist in dictionary.")
+```
+
+---
+
+### Looking up values (cont. 1)
+
+```python
+filled = {"one": 1, "two": 2, "three": 3}
+
+# Use "get()" method to avoid the KeyError
+print(filled.get("one"))      # => 1
+print(filled.get("four"))     # => None
+
+# The get method supports a default argument
+# when the value is missing
+print(filled.get("one", 4))   # => 1
+print(filled.get("four", 4))  # => 4
+```
+
+---
+
+### Adding values
+
+```python
+filled = {"one": 1, "two": 2, "three": 3}
+
+# this overrides existing values if the key is already present
+filled.update({"four":4}) 
+# {"one": 1, "two": 2, "three": 3, "four": 4}
+filled["four"] = 4 # another way to add to dict
+
+# "setdefault()" inserts into a dictionary only if the
+# given key isn't present
+filled.setdefault("five", 5)  # filled_dict["five"] is set to 5
+filled.setdefault("five", 6)  # filled_dict["five"] is still 5
+
+# inspect the dictionary contents
+print(filled)
+```
+
+---
+
+## Looping through keys and values
+
+```python
+gold_medal_count = {"USA": 40, "Australia": 18}
+
+# print all keys
+for key in gold_medals_dict.keys():
+	print(key)
+
+# print all values
+for value in gold_medals_dict.values():
+	print(value)
+
+# print all key, value pairs
+for key, value in gold_medals_dict.items():
+	print(f"{key} - {value}")
+```
+
+---
+
+### Removing items
+
+```python
+filled = {"one": 1, "two": 2, "three": 3}
+
+# Remove keys from a dictionary with del
+del filled["one"]
+```
+
+---
+
+## I/O (Input/Output)
+
+---
+
+### CSV (Comma-separated values)
+
+```csv
+name,department,birthday_month
+John Smith,Accounting,November
+Erica Meyers,IT,March
+```
+
+---
+
+### Reading CSV Files with `csv.reader()`
+
+```python
+import csv
+
+with open("employee_birthday.csv") as csv_file:
+    csv_reader = csv.reader(csv_file)
+	next(csv_reader) # skip headers (first row)
+
+	for row in csv_reader:
+		if row:
+			employee_name = row[0]
+			department_name = row[1]
+			birthday_month = row[2]
+		    print(f"Name: {employee_name}")
+			print(f"Department: {department_name}")
+			print(f"Birth month: {birthday_month}")
+```
+
+---
+
+### Using `csv.DictReader`
+
+```python
+import csv
+
+with open("employee_birthday.csv") as csv_file:
+    csv_dictreader = csv.DictReader(csv_file)
+	for row in csv_dictreader:
+		if row:
+		    print(f"Name: {row["name"]}")
+			print(f"Department: {row["department"]}")
+			print(f"Birth month: {row["birthday_month"]}")
+```
 
 ---
