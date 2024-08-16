@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title></title>
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/black.css" id="theme" />
+    <link rel="stylesheet" href="plugin/highlight/zenburn.css" />
+	<link rel="stylesheet" href="css/layout.css" />
+	<link rel="stylesheet" href="plugin/customcontrols/style.css">
+
+
+
+    <script defer src="dist/fontawesome/all.min.js"></script>
+
+	<script type="text/javascript">
+		var forgetPop = true;
+		function onPopState(event) {
+			if(forgetPop){
+				forgetPop = false;
+			} else {
+				parent.postMessage(event.target.location.href, "app://obsidian.md");
+			}
+        }
+		window.onpopstate = onPopState;
+		window.onmessage = event => {
+			if(event.data == "reload"){
+				window.document.location.reload();
+			}
+			forgetPop = true;
+		}
+
+		function fitElements(){
+			const itemsToFit = document.getElementsByClassName('fitText');
+			for (const item in itemsToFit) {
+				if (Object.hasOwnProperty.call(itemsToFit, item)) {
+					var element = itemsToFit[item];
+					fitElement(element,1, 1000);
+					element.classList.remove('fitText');
+				}
+			}
+		}
+
+		function fitElement(element, start, end){
+
+			let size = (end + start) / 2;
+			element.style.fontSize = `${size}px`;
+
+			if(Math.abs(start - end) < 1){
+				while(element.scrollHeight > element.offsetHeight){
+					size--;
+					element.style.fontSize = `${size}px`;
+				}
+				return;
+			}
+
+			if(element.scrollHeight > element.offsetHeight){
+				fitElement(element, start, size);
+			} else {
+				fitElement(element, size, end);
+			}		
+		}
+
+
+		document.onreadystatechange = () => {
+			fitElements();
+			if (document.readyState === 'complete') {
+				if (window.location.href.indexOf("?export") != -1){
+					parent.postMessage(event.target.location.href, "app://obsidian.md");
+				}
+				if (window.location.href.indexOf("print-pdf") != -1){
+					let stateCheck = setInterval(() => {
+						clearInterval(stateCheck);
+						window.print();
+					}, 250);
+				}
+			}
+	};
+
+
+        </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides"><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+# Python 
+
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/219px-Python-logo-notext.svg.png" alt="Python" style="object-fit: scale-down">
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## What is Python?
+
+A high-level, general-purpose programming language designed by Guido von Rossum, first released on 1991.
+
+Its design philosophy emphasizes code readability with the use of significant indentation.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## REPL
+
+The `Read-Eval-Print-Loop` otherwise known as the interactive console.
+
+```bash
+Python 3.9.0 (default, Jul 16 2023, 00:45:39)
+[GCC 9.4.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> "Hello, World!"
+'Hello, World!'
+>>>
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Hello, World!
+
+```python
+# Create a file named hello_world.py with the following contents
+print("Hello, World!")
+```
+
+Run the program via the command line with:
+
+`python hello_world.py`
+
+Use `python3` if you're running MacOS.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Built-in Types
+
+| Type  | Description                                                   |
+| ----- | ------------------------------------------------------------- |
+| int   | Integers  - whole numbers                                     |
+| float | Floating point numbers - decimal values or fractional numbers |
+| str   | Strings - textual data e.g. sequence of characters            |
+| bool  | Boolean - represents truth value i.e. `True` or `False`       |
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Numeric values
+
+```python
+# Math is what you would expect
+1 + 1   # => 2
+8 - 1   # => 7
+10 * 2  # => 20
+35 / 5  # => 7.0
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Strings
+
+```python
+# Strings are created with " or '
+"This is a string."
+'This is also a string.'
+
+# Strings can be added too
+"Hello " + "world!"  # => "Hello world!"
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### `f-strings` or Formatted String Literals
+
+```python
+band = "blink-182"
+f"Pop-punk band from SoCal: {band}"
+# => "Pop-punk band from SoCal: blink-182"
+
+# Any valid expression inside the curly braces is returned 
+# to the string.
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Booleans
+
+```python
+True   # => True
+False  # => False
+
+# Generally used for comparisons
+1 == 1  # => True
+2 == 1  # => False
+1 != 1  # => False
+2 != 1  # => True
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### The `None` type
+
+```python
+# None is an object
+# Used to denote the absence of a value
+# Generally used for comparisons
+None  # => None
+
+# Use "is" when performing comparisons
+"etc" is None  # => False
+None is None   # => True
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Variables
+
+```python
+# Convention in naming variables is the snake_case style.
+some_var = 5
+some_var  # => 5
+
+# The `=` is the assignment operator.
+# The left-hand side is where the variable name is defined.
+# The right-hand side is the value being assigned to the variable.
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## User Input
+
+```python
+fave_music_genre = input("Favorite music genre? ")
+print(fave_music_genre) # prints out user provided input
+
+# The `input` function returns a string.
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Error Handling
+
+```python
+# Handle exceptions with a try/except block
+user_input_raw = input("Please enter a number: ")
+try:
+	user_input_number = float(user_input_raw)
+	print(user_input_number)
+except ValueError:
+	print(f"You entered an invalid number {user_input_raw}")
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Getting type information
+
+```python
+print(type(1)) # => <class 'int'>
+print(type(1) == int) # => True
+
+print(isinstance(1, int)) # True
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Functions
+
+In programming, a **function** is a self-contained block of code that encapsulates a specific task or related group of tasks.
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Syntax
+
+```python
+# Use "def" to create new functions
+def add(x, y):
+    print(f"x is {x} and y is {y}")
+    return x + y  # Return values with a return statement
+
+# Calling functions with parameters
+add(5, 6)  # => prints out "x is 5 and y is 6" and returns 11
+
+# Another way to call functions is with keyword arguments
+add(y=6, x=5)  # Keyword arguments can arrive in any order.
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Positional Arguments
+
+The most straightforward way to pass arguments to a Python function is with **positional arguments** (also called **required arguments**).
+
+```python
+def format_item_price(qty, item, price):
+	print(f"{qty} {item} cost ${price:.2f}")
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Keyword Arguments
+
+Functions can also be called by specifying arguments in the form of `<keyword>=<value>`.
+
+```python
+format_item_price(qty=6, item="bananas", price=1.74)
+# 6 bananas cost $1.74
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Scope
+
+```python
+# global scope
+x = 5
+
+def set_x(num):
+    # local scope begins here
+    # local var x not the same as global var x
+    x = num    # => 43
+    print(x)   # => 43
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Conditionals
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Boolean (or Logical) Operators
+
+```python
+# Note "and" and "or" are case-sensitive
+True and False  # => False
+False or True   # => True
+
+# negate with not
+not True   # => False
+not False  # => True
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### `and` Truth Table
+
+| X     | Y     | X and Y |
+| ----- | ----- | ------- |
+| True  | True  | True    |
+| True  | False | False   |
+| False | True  | False   |
+| False | False | False   |
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### `or` Truth Table
+
+| X     | Y     | X or Y |
+| ----- | ----- | ------ |
+| True  | True  | True   |
+| True  | False | True   |
+| False | True  | True   |
+| False | False | False  |
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### `not` Truth Table
+
+| X     | not(X) |
+| ----- | ------ |
+| True  | False  |
+| False | False  |
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Comparison Operators
+
+```python
+# Equality is ==
+1 == 1  # => True
+2 == 1  # => False
+
+# Inequality is !=
+1 != 1  # => False
+2 != 1  # => True
+
+# More comparisons
+1 < 10  # => True
+1 > 10  # => False
+2 <= 2  # => True
+2 >= 2  # => True
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Control Flow
+
+```python
+some_var = 5
+
+# Here is an if statement. Indentation is significant in Python!
+# This prints "some_var is smaller than 10"
+if some_var > 10:
+    print("some_var is totally bigger than 10.")
+elif some_var < 10:    # This elif clause is optional.
+    print("some_var is smaller than 10.")
+else:                  # This is optional too.
+    print("some_var is indeed 10.")
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Truthiness and Falsiness
+
+What values are considered _falsy_? (Check with the `bool` function.)
+
+- Zero values of any numeric type e.g. `0`, `0.0`
+- Empty strings `""`
+- Empty collections e.g. `list`, `set`, `tuple`, `dict`
+- `None`
+- `False`
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Type Hints
+
+```python
+# Support for type hints added in version 3.5.
+
+# The function `surface_area_of_cube` takes an argument
+# expected to be an instance of `float`.
+# The function is expected to return an instance
+# of `str`, as indicated by the `-> str` hint.
+def surface_area_of_cube(edge_length: float) -> str:
+    return f"The surface area is {6 * edge_length ** 2}."
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Lists
+
+A list is an ordered collection of arbitrary objects. Lists are defined in Python by enclosing a comma-separated sequence of objects in square brackets (`[]`).
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Lists can contain arbitrary objects
+
+```python
+# The elements of a list can all be the same type:
+a = [2, 4, 6, 8]
+print(a) # [2, 4, 6, 8]
+
+# Or the elements can be of varying types:
+b = [21.42, 'foobar', 3, 4, 'bark', False, 3.14159]
+print(b)
+# [21.42, 'foobar', 3, 4, 'bark', False, 3.14159]
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### List items can be accessed by index
+
+```python
+# Individual elements in a list can be accessed using an index in square brackets. 
+# List indexing is zero-based.
+
+a = ['foo', 'bar', 'baz', 'qux', 'quux', 'corge']
+print(a[0]) # => 'foo'
+print(a[2]) # => 'baz'
+print(a[5]) # => 'corge'
+
+# Looking out of bounds is an IndexError
+print(a[6])  # Raises an IndexError
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Lists can be nested
+
+```python
+li = [
+	1,
+    [1, 2, 3]
+    5,
+]
+
+print(li[1][2]) # => 3
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Lists are mutable
+
+```python
+a = ['foo', 'bar', 'baz', 'qux', 'quux', 'corge']
+
+a[2] = 10
+a[-1] = 20
+print(a)
+# ['foo', 'bar', 10, 'qux', 'quux', 20]
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Slices
+
+```python
+# You can look at ranges with slice syntax.
+# The start index is included, the end index is not
+# (It's a closed/open range for you mathy types.)
+li = [1, 2, 3, 4]
+
+# Use any combination of these to make advanced slices
+# li[start : end : step]
+li[1:3]  # index 1 to 3 => [2, 3]
+li[2:]   # start from index 2 => [3, 4]
+li[:3]   # from start until index 3  => [1, 2, 3]
+li[::2]  # step size of 2 => [1, 3]
+li[::-1] # reverse order => [4, 3, 2, 1]
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### List Operations
+
+```python
+li = []
+
+# Add stuff to the end of a list with append
+li.append(1)    # li is now [1]
+li.append(2)    # li is now [1, 2]
+
+# Add multiple items with extend
+li.extend([3, 4]) # li is now [1, 2, 3, 4]
+
+# Remove from the end with pop
+li.pop()        # => 4 and li is now [1, 2, 3]
+# Or remove a specific element by providing an index 
+li.pop(1)       # => 2 and li is now [1, 3]
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### List Operations (cont. 1)
+
+```python
+a = ['foo', 'bar', 'baz', 'qux', 'quux', 'corge']
+
+# Check for "membership" i.e. is item in or not in the list
+print("qux" in a)      # => True
+print("thud" not in a) # => True
+
+# Returns the size of the list
+print(len(a)) # 6
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Loops
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### `while` loop
+
+```python
+"""
+While loops go until a condition is no longer met.
+prints:
+    0
+    1
+    2
+    3
+"""
+x = 0
+while x < 4:
+    print(x)
+    x += 1  # Shorthand for x = x + 1
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### `for` loop
+
+```python
+"""
+For loops iterate over lists
+prints:
+    dog is a mammal
+    cat is a mammal
+    mouse is a mammal
+"""
+for animal in ["dog", "cat", "mouse"]:
+    print(f"{animal} is a mammal")
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### `for` loop (cont. 1)
+
+```python
+# updating a list "in-line"
+nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+for index in range(len(nums)):
+    nums[index] = nums[index] ** 2
+print(squares)
+# [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### `for` loop (cont. 2)
+
+```python
+# creating a new list
+orig_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+squares = []
+for number in orig_list:
+    squares.append(number ** 2)
+print(squares)
+# [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### `range` function
+
+```python
+"""
+"range(number)" returns an iterable of numbers
+from zero up to (but excluding) the given number
+prints:
+    0
+    1
+    2
+    3
+"""
+for i in range(4):
+    print(i)
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### `range` (cont. 1)
+
+```python
+"""
+"range(lower, upper)" returns an iterable of numbers
+from the lower number to the upper number
+prints:
+    4
+    5
+    6
+    7
+"""
+for i in range(4, 8):
+    print(i)
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### `range` (cont. 2)
+
+```python
+"""
+"range(lower, upper, step)" returns an iterable of numbers
+from the lower number to the upper number, while incrementing
+by step. If step is not indicated, the default value is 1.
+prints:
+    4
+    6
+"""
+for i in range(4, 8, 2):
+    print(i)
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### `enumerate` function
+
+```python
+"""
+Loop over a list to retrieve both the index 
+and the value of each list item:
+    0 dog
+    1 cat
+    2 mouse
+"""
+animals = ["dog", "cat", "mouse"]
+for i, value in enumerate(animals):
+    print(i, value)
+```
+
+```python
+# updating a list "in-line"
+nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+for index, value in enumerate(nums):
+    nums[index] = value ** 2
+print(squares)
+# [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Nested Loops
+
+```python
+spreadsheet = [
+	[1, 2, 3],
+	[4, 5, 6],
+]
+
+for row in spreadsheet:
+	# the inner loop goes through all its items
+	# then hands control back to the outer loop
+    for cell in row:
+        print(cell)
+
+# 1
+# 2
+# 3
+# 4
+# 5
+# 6
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### List Comprehensions
+
+```python
+
+# syntax
+# new_list = [expression for member in iterable]
+
+orig_list = [1, 2, 3, 4]
+squares = [num ** 2 for num in orig_list]
+print(squares) # [1, 4, 9, 16]
+
+# This is equivalent to this for loop
+# orig_list = [1, 2, 3, 4]
+# squares = []
+# for item in orig_list:
+	# squares = item ** 2
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Dictionaries, Tuples, and Sets
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Dictionaries
+
+```python
+# Dictionaries store mappings from keys to values
+empty = {}
+# Here is a prefilled dictionary
+filled = {"one": 1, "two": 2, "three": 3}
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Dictionary Keys and Values
+
+```python
+# Note keys for dictionaries have to be immutable types.
+# Immutable types include ints, floats, strings, tuples.
+invalid = {[1,2,3]: "123"}  # => Yield a TypeError
+valid = {"123": [1,2,3]}   # Values can be of any type
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Looking up values
+
+```python
+filled = {"one": 1, "two": 2, "three": 3}
+
+# Look up values with []
+print(filled["one"])  # => 1
+
+# Check for existence of keys in a dictionary with "in"
+print("one" in filled)  # => True
+print(1 in filled)      # => False
+
+# Looking up a non-existing key is a KeyError
+try:
+	filled["four"]  # KeyError
+except KeyError:
+	print("Key does not exist in dictionary.")
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Looking up values (cont. 1)
+
+```python
+filled = {"one": 1, "two": 2, "three": 3}
+
+# Use "get()" method to avoid the KeyError
+print(filled.get("one"))      # => 1
+print(filled.get("four"))     # => None
+
+# The get method supports a default argument
+# when the value is missing
+print(filled.get("one", 4))   # => 1
+print(filled.get("four", 4))  # => 4
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Adding values
+
+```python
+filled = {"one": 1, "two": 2, "three": 3}
+
+# this overrides existing values if the key is already present
+filled.update({"four":4}) 
+# {"one": 1, "two": 2, "three": 3, "four": 4}
+filled["four"] = 4 # another way to add to dict
+
+# "setdefault()" inserts into a dictionary only if the
+# given key isn't present
+filled.setdefault("five", 5)  # filled_dict["five"] is set to 5
+filled.setdefault("five", 6)  # filled_dict["five"] is still 5
+
+# inspect the dictionary contents
+print(filled)
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## Looping through keys and values
+
+```python
+gold_medal_count = {"USA": 40, "Australia": 18}
+
+# print all keys
+for key in gold_medals_dict.keys():
+	print(key)
+
+# print all values
+for value in gold_medals_dict.values():
+	print(value)
+
+# print all key, value pairs
+for key, value in gold_medals_dict.items():
+	print(f"{key} - {value}")
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Removing items
+
+```python
+filled = {"one": 1, "two": 2, "three": 3}
+
+# Remove keys from a dictionary with del
+del filled["one"]
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## I/O (Input/Output)
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### CSV (Comma-separated values)
+
+```csv
+name,department,birthday_month
+John Smith,Accounting,November
+Erica Meyers,IT,March
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Reading CSV Files with `csv.reader()`
+
+```python
+import csv
+
+with open("employee_birthday.csv") as csv_file:
+    csv_reader = csv.reader(csv_file)
+	next(csv_reader) # skip headers (first row)
+
+	for row in csv_reader:
+		if row:
+			employee_name = row[0]
+			department_name = row[1]
+			birthday_month = row[2]
+		    print(f"Name: {employee_name}")
+			print(f"Department: {department_name}")
+			print(f"Birth month: {birthday_month}")
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Using `csv.DictReader`
+
+```python
+import csv
+
+with open("employee_birthday.csv") as csv_file:
+    csv_dictreader = csv.DictReader(csv_file)
+	for row in csv_dictreader:
+		if row:
+		    print(f"Name: {row["name"]}")
+			print(f"Department: {row["department"]}")
+			print(f"Birth month: {row["birthday_month"]}")
+```
+</div></script></section></div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/zoom/zoom.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/math/math.js"></script>
+	<script src="plugin/mermaid/mermaid.js"></script>
+	<script src="plugin/chart/chart.min.js"></script>
+	<script src="plugin/chart/plugin.js"></script>
+	<script src="plugin/menu/menu.js"></script>
+	<script src="plugin/customcontrols/plugin.js"></script>
+
+    <script>
+      function extend() {
+        var target = {};
+        for (var i = 0; i < arguments.length; i++) {
+          var source = arguments[i];
+          for (var key in source) {
+            if (source.hasOwnProperty(key)) {
+              target[key] = source[key];
+            }
+          }
+        }
+        return target;
+      }
+
+	  function isLight(color) {
+		let hex = color.replace('#', '');
+
+		// convert #fff => #ffffff
+		if(hex.length == 3){
+			hex = `${hex[0]}${hex[0]}${hex[1]}${hex[1]}${hex[2]}${hex[2]}`;
+		}
+
+		const c_r = parseInt(hex.substr(0, 2), 16);
+		const c_g = parseInt(hex.substr(2, 2), 16);
+		const c_b = parseInt(hex.substr(4, 2), 16);
+		const brightness = ((c_r * 299) + (c_g * 587) + (c_b * 114)) / 1000;
+		return brightness > 155;
+	}
+
+	var bgColor = getComputedStyle(document.documentElement).getPropertyValue('--r-background-color').trim();
+	var isLight = isLight(bgColor);
+
+	if(isLight){
+		document.body.classList.add('has-light-background');
+	} else {
+		document.body.classList.add('has-dark-background');
+	}
+
+      // default options to init reveal.js
+      var defaultOptions = {
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealZoom,
+          RevealNotes,
+          RevealMath.MathJax3,
+		  RevealMermaid,
+		  RevealChart,
+		  RevealCustomControls,
+		  RevealMenu,
+        ],
+
+
+    	allottedTime: 120 * 1000,
+
+		mathjax3: {
+			mathjax: 'plugin/math/mathjax/tex-mml-chtml.js',
+		},
+		markdown: {
+		  gfm: true,
+		  mangle: true,
+		  pedantic: false,
+		  smartLists: false,
+		  smartypants: false,
+		},
+
+		mermaid: {
+			theme: isLight ? 'default' : 'dark',
+		},
+
+		customcontrols: {
+			controls: [
+				{id: 'toggle-overview',
+				title: 'Toggle overview (O)',
+				icon: '<i class="fa fa-th"></i>',
+				action: 'Reveal.toggleOverview();'
+				},
+			]
+		},
+		menu: {
+			loadIcons: false
+		}
+      };
+
+      // options from URL query string
+      var queryOptions = Reveal().getQueryHash() || {};
+
+      var options = extend(defaultOptions, {"width":960,"height":700,"margin":0.04,"controls":true,"progress":true,"slideNumber":true,"transition":"slide","transitionSpeed":"default"}, queryOptions);
+    </script>
+
+    <script>
+      Reveal.initialize(options);
+    </script>
+  </body>
+
+  <!-- created with Advanced Slides -->
+</html>
