@@ -366,7 +366,7 @@ not False  # => True
 | X     | not(X) |
 | ----- | ------ |
 | True  | False  |
-| False | True  |
+| False | False  |
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
@@ -943,10 +943,10 @@ class Dog:
 
 # Instance attributes are unique to each instance of an object
 miles = Dog("Miles", 4)
-miles.say("Woof")
+print(miles.speak("Woof"))
 
 buddy = Dog("Buddy", 9)
-buddy.say("Bow wow")
+print(buddy.say("Bow wow"))
 
 # Class attributes are the same for all instances
 print(miles.species)
@@ -958,14 +958,14 @@ print(buddy.species)
 ## `__str__` and other *dunder methods*
 
 ```python
-# instance.py
+# instances.py
 
 miles = Dog("Miles", 4)
 print(miles)
 # <__main__.Dog object at 0x00aeff70>
 ```
 
-Now add the following code to `dog.py`, then try running `instance.py` again.
+Now add the following code to `dog.py`, then try running `instances.py` again.
 
 ```python
     def __str__(self):
@@ -986,6 +986,7 @@ Now add the following code to `dog.py`, then try running `instance.py` again.
 	<script src="plugin/chart/plugin.js"></script>
 	<script src="plugin/menu/menu.js"></script>
 	<script src="plugin/customcontrols/plugin.js"></script>
+	<script src="plugin/copycode/copycode.js"></script>
 
     <script>
       function extend() {
@@ -1033,6 +1034,7 @@ Now add the following code to `dog.py`, then try running `instance.py` again.
         center: true,
         transition: 'default', // none/fade/slide/convex/concave/zoom
         plugins: [
+          CopyCode,
           RevealMarkdown,
           RevealHighlight,
           RevealZoom,
