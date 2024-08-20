@@ -366,7 +366,7 @@ not False  # => True
 | X     | not(X) |
 | ----- | ------ |
 | True  | False  |
-| False | True   |
+| False | True  |
 </div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
@@ -907,6 +907,69 @@ with open("employee_birthday.csv") as csv_file:
 		    print(f"Name: {row["name"]}")
 			print(f"Department: {row["department"]}")
 			print(f"Birth month: {row["birthday_month"]}")
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## OOP (Object-Oriented Programming)
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Classes
+
+```python
+# dog.py
+
+class Dog:
+	# Class attribute
+    species = "Canis familiaris"
+
+	# Constructor containing instance attributes
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+	# Instance method
+    def speak(self, sound):
+        return f"{self.name} says {sound}"
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Instances
+
+```python
+# instances.py
+
+# Instance attributes are unique to each instance of an object
+miles = Dog("Miles", 4)
+miles.say("Woof")
+
+buddy = Dog("Buddy", 9)
+buddy.say("Bow wow")
+
+# Class attributes are the same for all instances
+print(miles.species)
+print(buddy.species)
+```
+</div></script></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 700px; width: 960px; min-height: 700px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## `__str__` and other *dunder methods*
+
+```python
+# instance.py
+
+miles = Dog("Miles", 4)
+print(miles)
+# <__main__.Dog object at 0x00aeff70>
+```
+
+Now add the following code to `dog.py`, then try running `instance.py` again.
+
+```python
+    def __str__(self):
+        return f"{self.name} is {self.age} years old"
 ```
 </div></script></section></div>
     </div>
