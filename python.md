@@ -816,3 +816,66 @@ with open("employee_birthday.csv") as csv_file:
 ```
 
 ---
+
+## OOP (Object-Oriented Programming)
+
+---
+
+### Classes
+
+```python
+# dog.py
+
+class Dog:
+	# Class attribute
+    species = "Canis familiaris"
+
+	# Constructor containing instance attributes
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+	# Instance method
+    def speak(self, sound):
+        return f"{self.name} says {sound}"
+```
+
+---
+
+### Instances
+
+```python
+# instances.py
+
+# Instance attributes are unique to each instance of an object
+miles = Dog("Miles", 4)
+print(miles.speak("Woof"))
+
+buddy = Dog("Buddy", 9)
+print(buddy.say("Bow wow"))
+
+# Class attributes are the same for all instances
+print(miles.species)
+print(buddy.species)
+```
+
+---
+
+## `__str__` and other *dunder methods*
+
+```python
+# instances.py
+
+miles = Dog("Miles", 4)
+print(miles)
+# <__main__.Dog object at 0x00aeff70>
+```
+
+Now add the following code to `dog.py`, then try running `instances.py` again.
+
+```python
+    def __str__(self):
+        return f"{self.name} is {self.age} years old"
+```
+
+---
